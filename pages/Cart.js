@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Button, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { useEffect } from 'react';
 import styled from 'styled-components/native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,8 +15,12 @@ const Cart = ({ navigation }) => {
         {products.map((item) => (
           <CartItem title={item.title} img={item.img} key={item.id} id={item.id + ''} />
         ))}
-        <CatalogLink title="Back to catalog" onPress={() => navigation.navigate('Catalog')} />
       </Wrapper>
+      <Footer>
+        <LinkWrapper underlayColor="#5233ac" onPress={() => navigation.navigate('Catalog')}>
+          <CatalogLink>Back to catalog</CatalogLink>
+        </LinkWrapper>
+      </Footer>
     </Root>
   );
 };
@@ -28,9 +32,26 @@ const Root = styled.ScrollView`
 `;
 
 const Wrapper = styled.View`
-  flex: 1;
+  flex: 0.9;
 `;
-const CatalogLink = styled.Button`
-  text-decoration: underline;
+const Footer = styled.View`
+  justify-content: flex-end;
+  flex: 0.1;
+  padding: 0
+`;
+const LinkWrapper = styled.TouchableHighlight`
+  flex: 1;
+  background-color: #7950f2;
+  border-radius: 10px;
+  padding: 5px;
+`;
+const CatalogLink = styled.Text`
+  text-transform: uppercase;
+  padding: 5px 0;
   text-align: center;
+  border-radius: 10px;
+  color: #000;
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
 `;
