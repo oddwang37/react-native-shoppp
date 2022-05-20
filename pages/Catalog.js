@@ -35,8 +35,8 @@ const Catalog = () => {
             <ProductCard
               title={item.title}
               img={item.url}
-              key={item.id}
-              id={item.id + ''}
+              key={item.id + ''}
+              id={item.id}
             />
           );
         })}

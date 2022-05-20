@@ -13,9 +13,9 @@ const Cart = ({ navigation }) => {
     <Root>
       <Wrapper>
         {products.map((item) => (
-          <CartItem title={item.title} img={item.img} key={item.id} id={item.id} />
+          <CartItem title={item.title} img={item.img} key={item.id} id={item.id + ''} />
         ))}
-        <CatalogLink onPress={() => navigation.navigate('Catalog')}>Back to catalog</CatalogLink>
+        <CatalogLink title="Back to catalog" onPress={() => navigation.navigate('Catalog')} />
       </Wrapper>
     </Root>
   );
@@ -30,8 +30,7 @@ const Root = styled.ScrollView`
 const Wrapper = styled.View`
   flex: 1;
 `;
-const CatalogLink = styled.Text`
+const CatalogLink = styled.Button`
   text-decoration: underline;
   text-align: center;
-  margin-top: 20px;
 `;
