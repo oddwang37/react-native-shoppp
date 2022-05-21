@@ -1,26 +1,32 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView, Button } from 'react-native';
 import { useEffect } from 'react';
 import styled from 'styled-components/native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import CartItem from '../components/CartItem';
+import CartPlaceholder from '../components/CartPlaceholder';
 
 const Cart = ({ navigation }) => {
   const dispatch = useDispatch();
   const products = useSelector(({ cart }) => cart.products);
   return (
     <Root>
-      <Wrapper>
-        {products.map((item) => (
-          <CartItem title={item.title} img={item.img} key={item.id} id={item.id + ''} />
-        ))}
-      </Wrapper>
-      <Footer>
-        <LinkWrapper underlayColor="#5233ac" onPress={() => navigation.navigate('Catalog')}>
-          <CatalogLink>Back to catalog</CatalogLink>
-        </LinkWrapper>
-      </Footer>
+      {products.length === 0
+      ? <CartPlaceholder navigation={navigation} />
+      : <>
+          <Wrapper>
+            {products.map((item) => (
+              <CartItem title={item.title} img={item.img} key={item.id} id={item.id + ''} />
+            ))}
+          </Wrapper>
+          <Footer>
+            <SButton onPress={() => alert('You are not have enough money :( ')}>
+              <CatalogLink>Purchase</CatalogLink>
+            </SButton>
+          </Footer>
+        </>
+    }
     </Root>
   );
 };
@@ -29,21 +35,23 @@ export default Cart;
 
 const Root = styled.ScrollView`
   padding: 15px;
+  flex: 1;
 `;
 
 const Wrapper = styled.View`
-  flex: 0.9;
+  flex: 0.8;
 `;
 const Footer = styled.View`
   justify-content: flex-end;
-  flex: 0.1;
+  flex: 1;
   padding: 0
 `;
-const LinkWrapper = styled.TouchableHighlight`
+const SButton = styled.TouchableHighlight`
   flex: 1;
   background-color: #7950f2;
   border-radius: 10px;
   padding: 5px;
+  margin-bottom: 25px;
 `;
 const CatalogLink = styled.Text`
   text-transform: uppercase;

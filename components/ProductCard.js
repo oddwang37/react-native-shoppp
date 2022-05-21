@@ -5,8 +5,9 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { addProductCart, deleteProductCart} from '../redux/actions/cart';
+import { changeProductInCart } from '../redux/actions/products';
 
-const ProductCard = ({ title, img, id }) => {
+const ProductCard = ({ title, img, id, inCart }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector(({cart}) => cart.products);
 
@@ -26,13 +27,19 @@ const ProductCard = ({ title, img, id }) => {
       }
     });
     dispatch(action);
+    dispatch(changeProductInCart(id));
   };
 
+  const icon = inCart 
+  ? require('./../assets/star.png')
+  : require('./../assets/unactive-star.png');
+<Image source={icon} />;
 
   return (
     <Root width={imageWidth} onPress={handleProductClick} activeOpacity={0.6}>
       <Img width={imageWidth} height={imageHeight} source={{ uri: `${img}` }} />
       <Title>{title}</Title>
+      <FavIcon source={icon} />
     </Root>
   );
 };
@@ -40,14 +47,15 @@ const ProductCard = ({ title, img, id }) => {
 export default ProductCard;
 
 const Root = styled.TouchableOpacity`
-  display: flex;
   width: ${(p) => p.width}px;
   align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
 `;
 
 const Img = styled.Image`
-  width: ${(p) => p.width}px;
-  height: ${(p) => p.height}px;
+  width: ${(p) => p.width - 2}px;
+  height: ${(p) => p.height - 2}px;
 `;
 
 const Title = styled.Text`
@@ -57,4 +65,15 @@ const Title = styled.Text`
   margin-top: 5px;
   margin-bottom: 10px;
   text-transform: capitalize;
+  padding: 0 5px;
+  color: #000;
 `;
+const FavIcon = styled.Image`
+  margin-top: 10px;
+  width: 20px;
+  height: 20px;
+  align-self: flex-end;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+`

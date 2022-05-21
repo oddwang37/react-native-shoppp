@@ -1,10 +1,8 @@
 import axios from 'axios';
 
-const _baseUrl = 'https://dummyproducts-api.herokuapp.com';
-
-
 export const types = {
   SET_PRODUCTS: 'SET_PRODUCTS',
+  CHANGE_PRODUCT_IN_CART: 'CHANGE_PRODUCT_IN_CART',
 }
 
 export const setProducts = (items) => {
@@ -13,3 +11,9 @@ export const setProducts = (items) => {
     payload: items,
   }
 };
+export const changeProductInCart = (id) => {
+  return {
+    type: types.CHANGE_PRODUCT_IN_CART,
+    payload: id,
+  }
+}
