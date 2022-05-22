@@ -1,23 +1,26 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, ScrollView, Button } from 'react-native';
-import { useEffect } from 'react';
 import styled from 'styled-components/native';
-import { useDispatch, useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 
 import CartItem from '../components/CartItem';
 import CartPlaceholder from '../components/CartPlaceholder';
 
-const Cart = ({ navigation }) => {
-  const dispatch = useDispatch();
-  const products = useSelector(({ cart }) => cart.products);
+const Cart = ({navigation}) => {
+  const products = useSelector(({cart}) => cart.products);
   return (
     <Root>
-      {products.length === 0
-      ? <CartPlaceholder navigation={navigation} />
-      : <>
+      {products.length === 0 ? (
+        <CartPlaceholder navigation={navigation} />
+      ) : (
+        <>
           <Wrapper>
-            {products.map((item) => (
-              <CartItem title={item.title} img={item.img} key={item.id} id={item.id + ''} />
+            {products.map(item => (
+              <CartItem
+                title={item.title}
+                img={item.img}
+                key={item.id}
+                id={item.id + ''}
+              />
             ))}
           </Wrapper>
           <Footer>
@@ -26,7 +29,7 @@ const Cart = ({ navigation }) => {
             </SButton>
           </Footer>
         </>
-    }
+      )}
     </Root>
   );
 };
@@ -44,7 +47,7 @@ const Wrapper = styled.View`
 const Footer = styled.View`
   justify-content: flex-end;
   flex: 1;
-  padding: 0
+  padding: 0;
 `;
 const SButton = styled.TouchableHighlight`
   flex: 1;

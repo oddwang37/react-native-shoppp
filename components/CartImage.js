@@ -1,11 +1,17 @@
 import React from 'react';
-import { Text, View, TouchableHighlight, Image } from 'react-native';
 import styled from 'styled-components/native';
+import {useSelector} from 'react-redux';
 
-const CartImage = ({ onPress }) => {
+const CartImage = ({onPress}) => {
+  const isFetching = useSelector(({products}) => products.isFetching);
+
   return (
-    <Root onPress={onPress} activeOpacity={0.9} underlayColor="#cccccc">
-      <Image style={{ width: 25, height: 25 }} source={require('./../assets/cart.png')} />
+    <Root
+      disabled={isFetching}
+      onPress={onPress}
+      activeOpacity={0.9}
+      underlayColor="#cccccc">
+      <Img source={require('./../assets/cart.png')} />
     </Root>
   );
 };
@@ -19,4 +25,9 @@ const Root = styled.TouchableHighlight`
   width: 40px;
   height: 40px;
   border-radius: 10px;
+`;
+
+const Img = styled.Image`
+  width: 25px;
+  height: 25px;
 `;

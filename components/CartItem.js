@@ -1,15 +1,15 @@
 import React from 'react';
-import { Text, View, Image, useWindowDimensions } from 'react-native';
+import {useWindowDimensions} from 'react-native';
 import styled from 'styled-components/native';
 
-const CartItem = ({ title, img }) => {
-  const { height, width } = useWindowDimensions();
+const CartItem = ({title, img}) => {
+  const {height, width} = useWindowDimensions();
   const imageWidth = width / 3.5 - 20;
   const imageHeight = Math.round((imageWidth * 9) / 16);
 
   return (
     <Root>
-      <Img width={imageWidth} height={imageHeight} source={{ uri: `${img}` }} />
+      <Img width={imageWidth} height={imageHeight} source={{uri: `${img}`}} />
       <Title>{title}</Title>
     </Root>
   );

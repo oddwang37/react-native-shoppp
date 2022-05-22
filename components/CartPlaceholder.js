@@ -1,17 +1,18 @@
 import React from 'react';
-import { Text, View, TouchableHighlight, ScrollView } from 'react-native';
 import styled from 'styled-components/native';
 
 const CartPlaceholder = ({navigation}) => {
   return (
     <Root>
       <SText>You have not added items to your shopping cart yet :( </SText>
-      <SButton underlayColor="#5233ac" onPress={() => navigation.navigate('Catalog')}>
+      <SButton
+        underlayColor="#5233ac"
+        onPress={() => navigation.navigate('Catalog')}>
         <CatalogLink>Back to catalog</CatalogLink>
       </SButton>
     </Root>
-  )
-}
+  );
+};
 
 export default CartPlaceholder;
 
@@ -19,13 +20,13 @@ const Root = styled.View`
   padding-top: 120px;
   flex: 1;
   justify-content: space-between;
-`
+`;
 
 const SText = styled.Text`
   text-align: center;
   color: #000;
   font-size: 22px;
-`
+`;
 
 const SButton = styled.TouchableHighlight`
   flex: 1;
