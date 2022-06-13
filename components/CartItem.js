@@ -26,6 +26,7 @@ const Root = styled.View`
 const Img = styled.Image`
   width: 60px;
   height: 110px;
+  border-radius: 5px;
 `;
 
 const Title = styled.Text`

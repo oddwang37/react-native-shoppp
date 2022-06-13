@@ -2,21 +2,21 @@ import React from 'react';
 import styled from 'styled-components/native';
 import {useSelector} from 'react-redux';
 
-const CartImage = ({onPress}) => {
+const LinkImage = ({onPress, imgPath}) => {
   const isFetching = useSelector(({products}) => products.isFetching);
-
+  
   return (
     <Root
       disabled={isFetching}
       onPress={onPress}
       activeOpacity={0.9}
       underlayColor="#cccccc">
-      <Img source={require('./../assets/cart.png')} />
+      <Img source={imgPath} />
     </Root>
   );
 };
 
-export default CartImage;
+export default LinkImage;
 
 const Root = styled.TouchableHighlight`
   display: flex;

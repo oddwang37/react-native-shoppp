@@ -16,7 +16,7 @@ const ProductCard = ({title, img, id, inCart}) => {
 
   const handleProductClick = () => {
     let action = addProductCart({
-      title,
+      title, 
       img,
       id,
     });
@@ -28,17 +28,17 @@ const ProductCard = ({title, img, id, inCart}) => {
     dispatch(action);
     dispatch(changeProductInCart(id));
   };
-
+ 
   const icon = inCart
-    ? require('./../assets/star.png')
-    : require('./../assets/unactive-star.png');
+    ? require('./../assets/star.png') 
+    : require('./../assets/unactive-star.png'); 
   <Image source={icon} />;
 
   return (
     <Root width={imageWidth} onPress={handleProductClick} activeOpacity={0.6}>
       <Img width={imageWidth} height={imageHeight} source={{uri: `${img}`}} />
       <Title>{title}</Title>
-      <FavIcon source={icon} />
+      <FavIcon source={icon} /> 
     </Root>
   );
 };
@@ -55,6 +55,7 @@ const Root = styled.TouchableOpacity`
 const Img = styled.Image`
   width: ${p => p.width - 2}px;
   height: ${p => p.height - 2}px;
+  border-radius: 6px;
 `;
 
 const Title = styled.Text`

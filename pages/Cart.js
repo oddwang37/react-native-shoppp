@@ -7,6 +7,7 @@ import CartPlaceholder from '../components/CartPlaceholder';
 
 const Cart = ({navigation}) => {
   const products = useSelector(({cart}) => cart.products);
+  const store = useSelector((store) => store);;
   return (
     <Root>
       {products.length === 0 ? (
