@@ -14,7 +14,14 @@ const DateFilter = () => {
 
 // redux-persist transform Date object in string,
 // we must recieve an Date object
-  const dateFilterValue = new Date(dateFilter);
+  let dateFilterValue;
+  if (dateFilter) {
+    dateFilterValue = new Date(dateFilter);
+  } else {
+    //if dateFilter is null, started value will be 1 jan 1970
+    // need to set date picker start value to something useful like today
+    dateFilterValue = new Date();
+  }
 
   return (
     <Root>

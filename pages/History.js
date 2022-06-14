@@ -23,8 +23,13 @@ const History = () => {
 
     return `${month}/${day}/${year}`; 
   }
-
-  const filteredItems = items.filter((item) => getStringDate(item.date) === getStringDate(dateFilter));
+// if no filter, all items shown
+  let filteredItems;
+  if (dateFilter) {
+    filteredItems = items.filter((item) => getStringDate(item.date) === getStringDate(dateFilter));
+  } else {
+    filteredItems = items;
+  }
 
   const renderItem = ({item}) => {
     return (
@@ -46,7 +51,7 @@ const History = () => {
         ? <HistoryItems 
         data={filteredItems}
         renderItem={renderItem}
-        contentContainerStyle={{paddingBottom: 50}}
+        contentContainerStyle={{paddingBottom: 80}}
       />
        : <PlaceholderText>
         Items that you selected will be here
@@ -61,7 +66,7 @@ const Root = styled.View`
 `
 
 const HistoryItems = styled.FlatList`
-  padding: 15px;
+  padding: 0 15px;
 `
 const PlaceholderText = styled.Text`
   font-size: 22px;

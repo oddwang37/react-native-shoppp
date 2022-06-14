@@ -1,7 +1,7 @@
 import { types } from './../actions/history';
 
 const initialState = {
-  dateFilter: new Date(),
+  dateFilter: null,
   items: [],
 }
 
