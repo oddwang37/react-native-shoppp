@@ -13,15 +13,40 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 import {store, persistor} from './redux/configureStore';
 import LinkImage from './components/LinkImage';
 import {Cart, Catalog} from './pages';
-import Home from './pages/Home';
+import HomeStack from './pages/HomeStack';
 import History from './pages/History';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
+
+const getHeaderImg = (route) => {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Catalog';
+
+  switch (routeName) {
+    case 'Catalog':
+      return require('./assets/cart.png');
+    case 'My Cart':
+      return require('./assets/home.png');
+  }
+}
+
+
+
+const getHeaderImageLink = (route) => {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Catalog';
+
+  switch (routeName) {
+    case 'Catalog':
+      return ['My Cart', require('./assets/cart.png')];
+    case 'My Cart':
+      return ['Catalog', require('./assets/home.png')];
+  }
+}
 
 const App: () => Node = () => {
   return (
@@ -31,11 +56,12 @@ const App: () => Node = () => {
         <Drawer.Navigator>
           <Drawer.Screen
             name="Home"
-            component={Home}
-            options={({navigation}) => ({
+            component={HomeStack}
+            options={({navigation, route}) => ({
               headerRight: () => (
-                <LinkImage onPress={() => navigation.navigate('Cart')} imgPath={require('./assets/cart.png')} />
+                <LinkImage onPress={() => navigation.navigate(getHeaderImageLink(route)[0])} imgPath={getHeaderImageLink(route)[1]} />
               ),
+              headerTitle: getFocusedRouteNameFromRoute(route),
             })}
           />
           <Drawer.Screen name="History" component={History} />

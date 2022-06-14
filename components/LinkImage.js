@@ -25,6 +25,7 @@ const Root = styled.TouchableHighlight`
   width: 40px;
   height: 40px;
   border-radius: 10px;
+  margin-right: 15px;
 `;
 
 const Img = styled.Image`

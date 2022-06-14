@@ -14,7 +14,7 @@ const ListItem = ({title, img, price, date, colorway}) => {
                   (colorway.slice(0, 43) + '...') :
                   colorway}
         </SecondText>
-        <Price>${price}</Price>
+        <Price>{price ? ('$' + price) : 'N/A'}</Price>
         <SecondText>{date}</SecondText>
       </Inner>
     </Root>

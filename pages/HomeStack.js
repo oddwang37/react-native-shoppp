@@ -6,7 +6,7 @@ import Catalog from './Catalog';
 import Cart from './Cart';
 import LinkImage from '../components/LinkImage';
 
-const Home = () => {
+const HomeStack = () => {
   const Stack = createNativeStackNavigator();
 
   return (
@@ -20,10 +20,17 @@ const Home = () => {
         ),
         })}
         />
-        <Stack.Screen name="Cart" component={Cart} />
+        <Stack.Screen 
+          name="My Cart" 
+          component={Cart}
+          options={{
+            headerTitle: 'My Cart',
+          }
+          } 
+        />
     </Stack.Navigator>
   );
 };
 
-export default Home;
+export default HomeStack;
 

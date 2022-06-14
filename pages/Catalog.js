@@ -36,7 +36,7 @@ const Catalog = () => {
   const getProducts = async () => {
     try {
       const result = await axios.get(
-        'https://example-data.draftbit.com/sneakers?_limit=1000',
+        'https://example-data.draftbit.com/sneakers?_limit=200',
         //?_start=0&_limit=10  http://jsonplaceholder.typicode.com/photos?_start=0&_limit=10
       );
       const data = result.data.slice();
