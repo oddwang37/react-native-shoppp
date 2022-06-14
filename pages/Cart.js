@@ -7,7 +7,7 @@ import CartPlaceholder from '../components/CartPlaceholder';
 
 const Cart = ({navigation}) => {
   const products = useSelector(({cart}) => cart.products);
-  const store = useSelector((store) => store);;
+
   return (
     <Root>
       {products.length === 0 ? (
@@ -40,7 +40,7 @@ const Cart = ({navigation}) => {
 export default Cart;
 
 const Root = styled.ScrollView`
-  padding: 15px;
+  padding: 15px 15px 0 15px;
   flex: 1;
 `;
 

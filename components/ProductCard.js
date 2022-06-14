@@ -1,19 +1,15 @@
 import React from 'react';
-import {Image, useWindowDimensions, Text} from 'react-native';
+import {Image} from 'react-native';
 import styled from 'styled-components/native';
 import {useSelector, useDispatch} from 'react-redux';
 
 import {addProductCart, deleteProductCart} from '../redux/actions/cart';
 import {changeProductInCart} from '../redux/actions/products';
-import {addProductToHistory} from '../redux/actions/history'
+import {addProductToHistory} from '../redux/actions/history';
 
 const ProductCard = ({title, img, id, price, colorway, inCart}) => {
   const dispatch = useDispatch();
   const cartItems = useSelector(({cart}) => cart.products);
-
-  const {height, width} = useWindowDimensions();
-  const imageHeight = Math.round((width * 9) / 16);
-  const imageWidth = width / 2 - 25;
 
   const handleProductClick = () => {
     let isItemInCart = false;
@@ -28,30 +24,30 @@ const ProductCard = ({title, img, id, price, colorway, inCart}) => {
       dispatch(deleteProductCart(id));
     } else {
       const itemObj = {
-          title,
-          img,
-          id,
-          price,
-          colorway
-      }
+        title,
+        img,
+        id,
+        price,
+        colorway,
+      };
       dispatch(addProductCart(itemObj));
       dispatch(addProductToHistory({...itemObj, date: Date.now()}));
     }
     dispatch(changeProductInCart(id));
   };
- 
+
   const icon = inCart
-    ? require('./../assets/star.png') 
-    : require('./../assets/unactive-star.png'); 
+    ? require('./../assets/star.png')
+    : require('./../assets/unactive-star.png');
   <Image source={icon} />;
 
   return (
-    <Root width={imageWidth} onPress={handleProductClick} activeOpacity={0.6}>
+    <Root onPress={handleProductClick} activeOpacity={0.6}>
       <Img resizeMode="contain" source={{uri: `${img}`}} />
       <Info>
         <Title>{title}</Title>
         <Colorway>{colorway}</Colorway>
-        <Price>{price ? ('$' + price) : 'N/A'}</Price>
+        <Price>{price ? '$' + price : 'N/A'}</Price>
       </Info>
       <FavIcon source={icon} />
     </Root>
@@ -61,7 +57,7 @@ const ProductCard = ({title, img, id, price, colorway, inCart}) => {
 export default ProductCard;
 
 const Root = styled.TouchableOpacity`
-  width: ${p => p.width}px;
+  width: 47%;
   margin-bottom: 15px;
   padding-bottom: 10px;
 `;
@@ -75,7 +71,7 @@ const Img = styled.Image`
 
 const Info = styled.View`
   padding: 0 5px;
-`
+`;
 
 const Title = styled.Text`
   font-weight: 700;
@@ -90,14 +86,14 @@ const Colorway = styled.Text`
   font-size: 12px;
   color: rgba(0, 0, 0, 0.6);
   align-self: flex-start;
-`
+`;
 
 const Price = styled.Text`
   font-size: 16px;
   font-weight: 700;
   color: #000;
   align-self: flex-start;
-`
+`;
 const FavIcon = styled.Image`
   margin-top: 10px;
   width: 20px;

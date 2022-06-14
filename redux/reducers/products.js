@@ -1,4 +1,4 @@
-import { types } from '../actions/products';
+import {types} from '../actions/products';
 
 const initialState = {
   items: [],
@@ -10,14 +10,14 @@ export const productsReducer = (state = initialState, action) => {
     case types.SET_PRODUCTS:
       return {items: action.payload, isFetching: false};
     case types.CHANGE_PRODUCT_IN_CART:
-      const oldItems = state.items.map((item) => {
-        if ( item.id === action.payload) {
+      const oldItems = state.items.map(item => {
+        if (item.id === action.payload) {
           return {...item, inCart: !item.inCart};
         } else {
           return item;
         }
       });
-      return { ...state, items: oldItems};
+      return {...state, items: oldItems};
     default:
       return state;
   }

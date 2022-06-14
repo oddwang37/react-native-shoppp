@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import Catalog from './Catalog';
@@ -11,26 +10,27 @@ const HomeStack = () => {
 
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen
+      <Stack.Screen
         name="Catalog"
         component={Catalog}
         options={({navigation}) => ({
-        headerRight: () => (
-          <LinkImage onPress={() => navigation.navigate('Cart')} imgPath="./assets/cart.png" />
-        ),
+          headerRight: () => (
+            <LinkImage
+              onPress={() => navigation.navigate('Cart')}
+              imgPath="./assets/cart.png"
+            />
+          ),
         })}
-        />
-        <Stack.Screen 
-          name="My Cart" 
-          component={Cart}
-          options={{
-            headerTitle: 'My Cart',
-          }
-          } 
-        />
+      />
+      <Stack.Screen
+        name="My Cart"
+        component={Cart}
+        options={{
+          headerTitle: 'My Cart',
+        }}
+      />
     </Stack.Navigator>
   );
 };
 
 export default HomeStack;
-

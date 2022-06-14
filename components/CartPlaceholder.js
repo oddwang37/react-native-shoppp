@@ -9,8 +9,9 @@ const CartPlaceholder = ({navigation}) => {
       <SText>You have not added items to your shopping cart yet :( </SText>
       <Button
         underlayColor="#5233ac"
-        onPress={() => navigation.navigate('Catalog')} title="Back to catalog">
-      </Button>
+        onPress={() => navigation.navigate('Catalog')}
+        title="Back to catalog"
+      />
     </Root>
   );
 };
@@ -29,4 +30,3 @@ const SText = styled.Text`
   font-size: 22px;
   margin-bottom: 20px;
 `;
-
