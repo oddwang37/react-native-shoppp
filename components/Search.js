@@ -30,7 +30,6 @@ const Root = styled.View`
   height: 70px;
   flex-direction: row;
   padding: 15px 15px 10px 15px;
-  background-color: rgb(16, 148, 128);
 `
 
 const SButton = styled.TouchableHighlight`

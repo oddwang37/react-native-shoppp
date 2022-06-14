@@ -1,15 +1,12 @@
 import React from 'react';
-import {useWindowDimensions, View} from 'react-native';
+import { View} from 'react-native';
 import styled from 'styled-components/native';
 
 const ListItem = ({title, img, price, date, colorway}) => {
-  const {height, width} = useWindowDimensions();
-  const imageWidth = width / 3.5 - 20;
-  const imageHeight = Math.round((imageWidth * 9) / 16);
 
   return (
     <Root>
-      <Img resizeMode="contain" width={imageWidth} height={imageHeight} source={{uri: `${img}`}} />
+      <Img resizeMode="contain" source={{uri: `${img}`}} />
       <Inner>
         <Title>{title}</Title>
         <SecondText>

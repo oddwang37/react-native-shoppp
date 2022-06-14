@@ -8,15 +8,18 @@ import ListItem from '../components/ListItem';
 
 const History = () => {
   const items = useSelector(({history}) => history.items);
+  const dateFilter = useSelector(({history}) => history.dateFilter);
   const dispatch = useDispatch();
 
   const getStringDate = (date) => {
     const day = date.getDate();
     const month = date.getMonth() + 1;
-    const year = date.getFullYear().toString().slice(2);
+    const year = date.getFullYear();
 
     return `${month}/${day}/${year}`; 
   }
+
+  const filteredItems = items.filter((item) => getStringDate(item.date) === getStringDate(dateFilter));
 
   const renderItem = ({item}) => {
     return (
@@ -35,7 +38,7 @@ const History = () => {
     <Root>
       <DateFilter />
       <HistoryItems 
-        data={items}
+        data={filteredItems}
         renderItem={renderItem}
         contentContainerStyle={{paddingBottom: 50}}
       />
