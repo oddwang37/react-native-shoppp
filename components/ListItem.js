@@ -27,6 +27,7 @@ const Root = styled.View`
   align-items: center;
   padding: 5px 10px;
   border-radius: 8px;
+  height: 105px;
   shadow-color: #000;
   shadow-offset: 0px 2px;
   shadow-opacity: 0.25;

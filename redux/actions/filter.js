@@ -1,6 +1,6 @@
 export const types = {
   SET_FILTER_TEXT: 'SET_FILTER_TEXT',
-  SET_SEARCH_FOCUS: 'SET_SEARCH_FOCUS',
+  SET_AUTOCOMPLETE_MODE: 'SET_AUTOCOMPLETE_MODE',
 };
 
 export const setFilterText = text => {
@@ -10,9 +10,9 @@ export const setFilterText = text => {
   };
 };
 
-export const setSearchFocus = bool => {
+export const setAutocompleteMode = bool => {
   return {
-    type: types.SET_SEARCH_FOCUS,
+    type: types.SET_AUTOCOMPLETE_MODE,
     payload: bool,
   };
 };

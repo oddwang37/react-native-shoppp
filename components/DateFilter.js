@@ -24,11 +24,7 @@ const DateFilter = () => {
 
   return (
     <Root>
-      <Button
-        title="Select date"
-        onPress={() => setOpen(true)}
-        style={{borderRadius: 0}}
-      />
+      <Button title="Select date" onPress={() => setOpen(true)} />
       <DatePicker
         modal
         open={open}
@@ -49,5 +45,7 @@ const DateFilter = () => {
 export default DateFilter;
 
 const Root = styled.View`
-  height: 45px;
+  height: 55px;
+  margin-top: 15px;
+  padding: 0 15px;
 `;

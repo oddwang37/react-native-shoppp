@@ -1,11 +1,10 @@
 import React from 'react';
-import {View, BackHandler} from 'react-native';
+import {View} from 'react-native';
 import {useEffect} from 'react';
 import axios from 'axios';
 import {useSelector, useDispatch} from 'react-redux';
 
 import {setProducts} from '../redux/actions/products';
-import {setSearchFocus} from '../redux/actions/filter';
 import Search from '../components/Search';
 import ItemsBlock from '../components/ItemsBlock';
 import AutocompleteList from '../components/AutoCompleteList';
@@ -14,20 +13,12 @@ const Catalog = () => {
   const dispatch = useDispatch();
   const products = useSelector(({products}) => products.items);
   const filterSearch = useSelector(({filter}) => filter.filterSearch);
-  const searchIsFocused = useSelector(({filter}) => filter.isFocused);
+  const isAutocompleteEnabled = useSelector(
+    ({filter}) => filter.isAutocompleteEnabled,
+  );
 
   useEffect(() => {
     getProducts();
-    const backAction = () => {
-      if (searchIsFocused) {
-        dispatch(setSearchFocus(false));
-      }
-    };
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backAction,
-    );
-    return () => backHandler.remove('hardwareBackPress', backAction);
   }, []);
 
   const getProducts = async () => {
@@ -50,7 +41,7 @@ const Catalog = () => {
   return (
     <View>
       <Search />
-      {searchIsFocused ? (
+      {isAutocompleteEnabled ? (
         <AutocompleteList items={filteredProducts} />
       ) : (
         <ItemsBlock products={filteredProducts} />

@@ -64,10 +64,11 @@ const Title = styled.Text`
   color: rgba(0, 0, 0, 0.8);
   font-weight: 700;
   margin: 10px 15px 5px 20px;
-  font-size: 22px;
+  font-size: 18px;
 `;
 
 const Footer = styled.View`
   justify-content: flex-end;
   background-color: rgba(0, 0, 0, 0);
+  padding-bottom: 10px;
 `;

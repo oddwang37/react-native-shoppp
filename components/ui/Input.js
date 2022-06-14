@@ -1,23 +1,51 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import {useDispatch, useSelector} from 'react-redux';
 
-const Input = (props) => {
+import {setFilterText} from '../../redux/actions/filter';
+
+const Input = props => {
+  const dispatch = useDispatch();
 
   return (
-    <Root {...props} />
+    <Root>
+      <TextInput {...props} />
+      <Clear onPress={() => dispatch(setFilterText(''))}>
+        <ClearText>Clear</ClearText>
+      </Clear>
+    </Root>
   );
 };
 
 export default Input;
 
-const Root = styled.TextInput`
+const Root = styled.View`
+  position: relative;
+  width: 100%;
+`;
+const TextInput = styled.TextInput`
   height: 40px;
   align-self: stretch;
   border-radius: 5px;
   border: 1px solid #000;
   width: 100%;
-  padding: 0 10px;
+  padding: 0 40px 0 10px;
   background-color: #fff;
 `;
 
+const Clear = styled.TouchableOpacity`
+  width: 40px;
+  position: absolute;
+  top: 2px;
+  right: 10px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 8px;
+`;
 
+const ClearText = styled.Text`
+  color: #000;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+  text-transform: uppercase;
+`;

@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components/native';
 import {useDispatch} from 'react-redux';
 
-import {setSearchFocus, setFilterText} from '../redux/actions/filter';
+import {setAutocompleteMode, setFilterText} from '../redux/actions/filter';
 
 const TextItem = ({title}) => {
   const dispatch = useDispatch();
 
   const onItemPress = () => {
-    dispatch(setSearchFocus(false));
+    dispatch(setAutocompleteMode(false));
     dispatch(setFilterText(title));
   };
   return (

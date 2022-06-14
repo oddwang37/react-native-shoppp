@@ -1,11 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
 
 const Button = props => {
   const {title, onPress} = props;
+  const [isPressed, setIsPressed] = useState(false);
 
   return (
-    <Root onPress={onPress} {...props}>
+    <Root
+      onPress={() => {
+        onPress();
+      }}
+      onPressIn={() => setIsPressed(true)}
+      onPressOut={() => setIsPressed(false)}
+      isPressed={isPressed}
+      {...props}>
       <ButtonText>{title}</ButtonText>
     </Root>
   );
@@ -13,10 +21,11 @@ const Button = props => {
 
 export default Button;
 
-const Root = styled.TouchableHighlight`
+const Root = styled.Pressable`
   background-color: #131313;
   border-radius: 10px;
   padding: 5px;
+  transform: ${p => (p.isPressed ? 'scale(0.9)' : 'scale(1.0)')};
 `;
 
 const ButtonText = styled.Text`

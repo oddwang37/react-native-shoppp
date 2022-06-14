@@ -64,7 +64,6 @@ const Root = styled.TouchableOpacity`
 
 const Img = styled.Image`
   width: 100%;
-  height: undefined;
   aspect-ratio: 0.8;
   border-radius: 6px;
 `;
