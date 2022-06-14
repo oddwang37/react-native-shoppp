@@ -16,12 +16,14 @@ const ItemsBlock = ({products}) => {
 
   const filteredProducts = products.filter((item) => item.title.includes(filterSearch));
 
-  const renderItem = ({item}) => {
+  const renderItem = ({item, index}) => {
     return (
       <ProductCard
         title={item.title}
-        img={item.url}
+        img={item.media.smallImageUrl}
         id={item.id} 
+        price={item.retailPrice}
+        colorway={item.colorway}
         inCart={item.inCart}
       />
       )
@@ -36,6 +38,7 @@ const ItemsBlock = ({products}) => {
           data={filteredProducts}
           renderItem={renderItem}
           numColumns={2}
+          contentContainerStyle={{paddingBottom: 100}}
           columnWrapperStyle={{justifyContent: 'space-between'}}
           keyExtractor={item => item.id}
           >

@@ -1,15 +1,16 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
+import SButton from './ui/Button';
+
 const CartPlaceholder = ({navigation}) => {
   return (
     <Root>
       <SText>You have not added items to your shopping cart yet :( </SText>
-      <SButton
+      <Button
         underlayColor="#5233ac"
-        onPress={() => navigation.navigate('Catalog')}>
-        <CatalogLink>Back to catalog</CatalogLink>
-      </SButton>
+        onPress={() => navigation.navigate('Catalog')} title="Back to catalog">
+      </Button>
     </Root>
   );
 };
@@ -28,21 +29,3 @@ const SText = styled.Text`
   font-size: 22px;
 `;
 
-const SButton = styled.TouchableHighlight`
-  flex: 1;
-  background-color: #7950f2;
-  border-radius: 10px;
-  padding: 5px;
-  margin-top: 50px;
-`;
-
-const CatalogLink = styled.Text`
-  text-transform: uppercase;
-  padding: 5px 0;
-  text-align: center;
-  border-radius: 10px;
-  color: #000;
-  font-weight: 700;
-  font-size: 16px;
-  color: #fff;
-`;

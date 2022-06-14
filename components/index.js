@@ -1,6 +1,6 @@
-import CartItem from './CartItem';
-import CartImage from './CartImage';
+import ListItem from './ListItem';
+import LinkImage from './LinkImage';
 import CartPlaceholder from './CartPlaceholder';
 import ProductCard from './ProductCard';
 
-export {CartItem, CartImage, CartPlaceholder, ProductCard};
+export {ListItem, LinkImage, CartPlaceholder, ProductCard};

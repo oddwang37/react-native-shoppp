@@ -17,6 +17,7 @@ const Root = styled.TextInput`
   border: 1px solid #000;
   width: 100%;
   padding: 0 10px;
+  background-color: #fff;
 `;
 
 

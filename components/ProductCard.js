@@ -1,31 +1,42 @@
 import React from 'react';
-import {Image, useWindowDimensions} from 'react-native';
+import {Image, useWindowDimensions, Text} from 'react-native';
 import styled from 'styled-components/native';
 import {useSelector, useDispatch} from 'react-redux';
 
 import {addProductCart, deleteProductCart} from '../redux/actions/cart';
 import {changeProductInCart} from '../redux/actions/products';
+import {addProductToHistory} from '../redux/actions/history'
 
-const ProductCard = ({title, img, id, inCart}) => {
+const ProductCard = ({title, img, id, price, colorway, inCart}) => {
   const dispatch = useDispatch();
   const cartItems = useSelector(({cart}) => cart.products);
 
   const {height, width} = useWindowDimensions();
   const imageHeight = Math.round((width * 9) / 16);
-  const imageWidth = width / 2 - 20;
+  const imageWidth = width / 2 - 25;
 
   const handleProductClick = () => {
-    let action = addProductCart({
-      title, 
-      img,
-      id,
-    });
+    let isItemInCart = false;
+
     cartItems.forEach(item => {
       if (item.id === id) {
-        action = deleteProductCart(id);
+        isItemInCart = true;
       }
     });
-    dispatch(action);
+
+    if (isItemInCart) {
+      dispatch(deleteProductCart(id));
+    } else {
+      const itemObj = {
+          title,
+          img,
+          id,
+          price,
+          colorway
+      }
+      dispatch(addProductCart(itemObj));
+      dispatch(addProductToHistory(itemObj));
+    }
     dispatch(changeProductInCart(id));
   };
  
@@ -36,9 +47,13 @@ const ProductCard = ({title, img, id, inCart}) => {
 
   return (
     <Root width={imageWidth} onPress={handleProductClick} activeOpacity={0.6}>
-      <Img width={imageWidth} height={imageHeight} source={{uri: `${img}`}} />
-      <Title>{title}</Title>
-      <FavIcon source={icon} /> 
+      <Img resizeMode="contain" source={{uri: `${img}`}} />
+      <Info>
+        <Title>{title}</Title>
+        <Colorway>{colorway}</Colorway>
+        <Price>{price ? ('$' + price) : 'N/A'}</Price>
+      </Info>
+      <FavIcon source={icon} />
     </Root>
   );
 };
@@ -47,27 +62,42 @@ export default ProductCard;
 
 const Root = styled.TouchableOpacity`
   width: ${p => p.width}px;
-  align-items: center;
   margin-bottom: 15px;
   padding-bottom: 10px;
 `;
 
 const Img = styled.Image`
-  width: ${p => p.width - 2}px;
-  height: ${p => p.height - 2}px;
+  width: 100%;
+  height: undefined;
+  aspect-ratio: 0.8;
   border-radius: 6px;
 `;
+
+const Info = styled.View`
+  padding: 0 5px;
+`
 
 const Title = styled.Text`
   font-weight: 700;
   font-size: 16px;
   width: 100%;
   margin-top: 5px;
-  margin-bottom: 10px;
   text-transform: capitalize;
-  padding: 0 5px;
   color: #000;
 `;
+
+const Colorway = styled.Text`
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+  align-self: flex-start;
+`
+
+const Price = styled.Text`
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+  align-self: flex-start;
+`
 const FavIcon = styled.Image`
   margin-top: 10px;
   width: 20px;

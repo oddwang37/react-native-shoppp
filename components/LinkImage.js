@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 
 const LinkImage = ({onPress, imgPath}) => {
   const isFetching = useSelector(({products}) => products.isFetching);
-  
+
   return (
     <Root
       disabled={isFetching}

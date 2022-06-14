@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import {useSelector} from 'react-redux';
 
-import CartItem from '../components/CartItem';
+import ListItem from '../components/ListItem';
 import CartPlaceholder from '../components/CartPlaceholder';
 
 const Cart = ({navigation}) => {
@@ -16,11 +16,13 @@ const Cart = ({navigation}) => {
         <>
           <Wrapper>
             {products.map(item => (
-              <CartItem
+              <ListItem
                 title={item.title}
                 img={item.img}
                 key={item.id}
                 id={item.id + ''}
+                price={item.price}
+                colorway={item.colorway}
               />
             ))}
           </Wrapper>
@@ -52,7 +54,7 @@ const Footer = styled.View`
 `;
 const SButton = styled.TouchableHighlight`
   flex: 1;
-  background-color: #7950f2;
+  background-color: #131313;
   border-radius: 10px;
   padding: 5px;
   margin-bottom: 25px;

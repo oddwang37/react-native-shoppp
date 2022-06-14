@@ -4,8 +4,8 @@ import styled from 'styled-components/native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setFilterText } from '../redux/actions/filter';
-import Input from './ui/Input';
 import { setSearchFocus } from '../redux/actions/filter';
+import { Input } from './ui';
 
 const Search = ({navigation}) => {
   const dispatch = useDispatch();
@@ -30,6 +30,7 @@ const Root = styled.View`
   height: 70px;
   flex-direction: row;
   padding: 15px 15px 10px 15px;
+  background-color: rgb(16, 148, 128);
 `
 
 const SButton = styled.TouchableHighlight`

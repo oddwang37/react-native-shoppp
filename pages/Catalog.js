@@ -36,8 +36,8 @@ const Catalog = () => {
   const getProducts = async () => {
     try {
       const result = await axios.get(
-        'http://jsonplaceholder.typicode.com/photos?_start=0&_limit=10',
-        //?_start=0&_limit=10
+        'https://example-data.draftbit.com/sneakers?_limit=1000',
+        //?_start=0&_limit=10  http://jsonplaceholder.typicode.com/photos?_start=0&_limit=10
       );
       const data = result.data.slice();
       data.forEach(item => (item.inCart = false));
