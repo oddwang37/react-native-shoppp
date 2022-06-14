@@ -14,11 +14,9 @@ const Button = props => {
 export default Button;
 
 const Root = styled.TouchableHighlight`
-  flex: 1;
   background-color: #131313;
   border-radius: 10px;
   padding: 5px;
-  margin-bottom: 25px;
 `;
 
 const ButtonText = styled.Text`

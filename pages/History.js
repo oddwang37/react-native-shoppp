@@ -49,7 +49,12 @@ const History = () => {
         <HistoryItems
           data={filteredItems}
           renderItem={renderItem}
-          contentContainerStyle={{paddingBottom: 80}}
+          contentContainerStyle={{
+            paddingBottom: 80,
+            paddingLeft: 15,
+            paddingRight: 15,
+            paddingTop: 15,
+          }}
         />
       ) : (
         <PlaceholderText>Items that you selected will be here</PlaceholderText>
@@ -62,9 +67,7 @@ export default History;
 
 const Root = styled.View``;
 
-const HistoryItems = styled.FlatList`
-  padding: 0 15px;
-`;
+const HistoryItems = styled.FlatList``;
 const PlaceholderText = styled.Text`
   font-size: 22px;
   color: #fff;

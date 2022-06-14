@@ -1,12 +1,27 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import {useSelector} from 'react-redux';
+import {FlatList} from 'react-native';
 
 import ListItem from '../components/ListItem';
 import CartPlaceholder from '../components/CartPlaceholder';
+import Button from '../components/ui/Button';
 
 const Cart = ({navigation}) => {
   const products = useSelector(({cart}) => cart.products);
+  const cartLength = products.length;
+
+  const renderItem = ({item}) => {
+    return (
+      <ListItem
+        title={item.title}
+        img={item.img}
+        id={item.id}
+        price={item.price}
+        colorway={item.colorway}
+      />
+    );
+  };
 
   return (
     <Root>
@@ -14,22 +29,24 @@ const Cart = ({navigation}) => {
         <CartPlaceholder navigation={navigation} />
       ) : (
         <>
-          <Wrapper>
-            {products.map(item => (
-              <ListItem
-                title={item.title}
-                img={item.img}
-                key={item.id}
-                id={item.id + ''}
-                price={item.price}
-                colorway={item.colorway}
-              />
-            ))}
-          </Wrapper>
+          <Title>
+            You have {cartLength} item{'('}s{')'} in your cart
+          </Title>
+          <FlatList
+            data={products}
+            renderItem={renderItem}
+            contentContainerStyle={{
+              paddingBottom: 80,
+              paddingLeft: 15,
+              paddingRight: 15,
+              paddingTop: 5,
+            }}
+          />
           <Footer>
-            <SButton onPress={() => alert('You are not have enough money :( ')}>
-              <CatalogLink>Purchase</CatalogLink>
-            </SButton>
+            <Button
+              onPress={() => alert('You are not have enough money :( ')}
+              title="Purchase"
+              style={{marginLeft: 15, marginRight: 15}}></Button>
           </Footer>
         </>
       )}
@@ -39,33 +56,18 @@ const Cart = ({navigation}) => {
 
 export default Cart;
 
-const Root = styled.ScrollView`
-  padding: 15px 15px 0 15px;
+const Root = styled.View`
   flex: 1;
 `;
 
-const Wrapper = styled.View`
-  flex: 0.8;
+const Title = styled.Text`
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: 700;
+  margin: 10px 15px 5px 20px;
+  font-size: 22px;
 `;
+
 const Footer = styled.View`
   justify-content: flex-end;
-  flex: 1;
-  padding: 0;
-`;
-const SButton = styled.TouchableHighlight`
-  flex: 1;
-  background-color: #131313;
-  border-radius: 10px;
-  padding: 5px;
-  margin-bottom: 25px;
-`;
-const CatalogLink = styled.Text`
-  text-transform: uppercase;
-  padding: 5px 0;
-  text-align: center;
-  border-radius: 10px;
-  color: #000;
-  font-weight: 700;
-  font-size: 16px;
-  color: #fff;
+  background-color: rgba(0, 0, 0, 0);
 `;

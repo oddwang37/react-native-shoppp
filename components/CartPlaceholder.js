@@ -8,7 +8,7 @@ const CartPlaceholder = ({navigation}) => {
     <Root>
       <SText>You have not added items to your shopping cart yet :( </SText>
       <Button
-        underlayColor="#5233ac"
+        underlayColor="#050314"
         onPress={() => navigation.navigate('Catalog')}
         title="Back to catalog"
       />
@@ -19,8 +19,8 @@ const CartPlaceholder = ({navigation}) => {
 export default CartPlaceholder;
 
 const Root = styled.View`
-  padding-top: 120px;
-  flex: 1;
+  flex: 0.55;
+  padding: 0 15px;
   justify-content: space-between;
 `;
 
@@ -28,5 +28,5 @@ const SText = styled.Text`
   text-align: center;
   color: #000;
   font-size: 22px;
-  margin-bottom: 20px;
+  margin-top: 250px;
 `;

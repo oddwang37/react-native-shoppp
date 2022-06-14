@@ -22,7 +22,16 @@ export default ListItem;
 const Root = styled.View`
   flex-direction: row;
   justify-content: flex-start;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 8px;
+  shadow-color: #000;
+  shadow-offset: 0px 2px;
+  shadow-opacity: 0.25;
+  shadow-radius: 4px;
+  elevation: 5;
 `;
 
 const Img = styled.Image`

@@ -25,10 +25,11 @@ const getHeaderImageLink = route => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Catalog';
 
   switch (routeName) {
+    // last boolean is responsible for displaying badge with quantity of items in cart
     case 'Catalog':
-      return ['My Cart', require('./assets/cart.png')];
+      return ['My Cart', require('./assets/cart.png'), true];
     case 'My Cart':
-      return ['Catalog', require('./assets/home.png')];
+      return ['Catalog', require('./assets/home.png'), false];
   }
 };
 
@@ -48,6 +49,7 @@ const App: () => Node = () => {
                       navigation.navigate(getHeaderImageLink(route)[0])
                     }
                     imgPath={getHeaderImageLink(route)[1]}
+                    badge={getHeaderImageLink(route)[2]}
                   />
                 ),
                 headerTitle: getFocusedRouteNameFromRoute(route),

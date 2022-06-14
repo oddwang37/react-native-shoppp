@@ -49,5 +49,5 @@ const DateFilter = () => {
 export default DateFilter;
 
 const Root = styled.View`
-  height: 70px;
+  height: 45px;
 `;
