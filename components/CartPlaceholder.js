@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
-import SButton from './ui/Button';
+import Button from './ui/Button';
 
 const CartPlaceholder = ({navigation}) => {
   return (
@@ -27,5 +27,6 @@ const SText = styled.Text`
   text-align: center;
   color: #000;
   font-size: 22px;
+  margin-bottom: 20px;
 `;
 

@@ -12,8 +12,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
 
-import store from './redux/configureStore';
+import {store, persistor} from './redux/configureStore';
 import LinkImage from './components/LinkImage';
 import {Cart, Catalog} from './pages';
 import Home from './pages/Home';
@@ -25,7 +26,8 @@ const Drawer = createDrawerNavigator();
 const App: () => Node = () => {
   return (
     <Provider store={store}>
-      <NavigationContainer>
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer>
         <Drawer.Navigator>
           <Drawer.Screen
             name="Home"
@@ -39,6 +41,7 @@ const App: () => Node = () => {
           <Drawer.Screen name="History" component={History} />
         </Drawer.Navigator>
       </NavigationContainer>
+      </PersistGate>
     </Provider>
   );
 };

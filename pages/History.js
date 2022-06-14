@@ -10,11 +10,16 @@ const History = () => {
   const items = useSelector(({history}) => history.items);
   const dateFilter = useSelector(({history}) => history.dateFilter);
   const dispatch = useDispatch();
+  const history = useSelector(({history}) => history);
+
 
   const getStringDate = (date) => {
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
+    // redux-persist transform Date object in string,
+    // we must recieve an Date object
+    const trueDate = new Date(date);
+    const day = trueDate.getDate();
+    const month = trueDate.getMonth() + 1;
+    const year = trueDate.getFullYear();
 
     return `${month}/${day}/${year}`; 
   }
@@ -37,11 +42,15 @@ const History = () => {
   return (
     <Root>
       <DateFilter />
-      <HistoryItems 
+      { filteredItems
+        ? <HistoryItems 
         data={filteredItems}
         renderItem={renderItem}
         contentContainerStyle={{paddingBottom: 50}}
       />
+       : <PlaceholderText>
+        Items that you selected will be here
+      </PlaceholderText>}
     </Root>
   );
 };
@@ -53,4 +62,8 @@ const Root = styled.View`
 
 const HistoryItems = styled.FlatList`
   padding: 15px;
+`
+const PlaceholderText = styled.Text`
+  font-size: 22px;
+  color: #fff;
 `

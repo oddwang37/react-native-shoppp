@@ -9,9 +9,12 @@ import { Button } from './ui';
 
 const DateFilter = () => {
   const dateFilter = useSelector(({history}) => history.dateFilter);
-  const [date, setDate] = useState(new Date())
   const [open, setOpen] = useState(false)
   const dispatch = useDispatch();
+
+// redux-persist transform Date object in string,
+// we must recieve an Date object
+  const dateFilterValue = new Date(dateFilter);
 
   return (
     <Root>
@@ -19,7 +22,7 @@ const DateFilter = () => {
       <DatePicker
         modal
         open={open}
-        date={dateFilter}
+        date={dateFilterValue}
         mode="date"
         onConfirm={(date) => {
           setOpen(false)

@@ -35,7 +35,7 @@ const ProductCard = ({title, img, id, price, colorway, inCart}) => {
           colorway
       }
       dispatch(addProductCart(itemObj));
-      dispatch(addProductToHistory(itemObj));
+      dispatch(addProductToHistory({...itemObj, date: Date.now()}));
     }
     dispatch(changeProductInCart(id));
   };
