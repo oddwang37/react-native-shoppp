@@ -17,14 +17,19 @@ const DateFilter = () => {
   if (dateFilter) {
     dateFilterValue = new Date(dateFilter);
   } else {
-    //if dateFilter is null, started value will be 1 jan 1970
-    // need to set date picker start value to something useful like today
+    //if dateFilter is null, start value will be 1 jan 1970
+    // need to set date picker start value to something useful start date value of picker like today
     dateFilterValue = new Date();
+  }
+
+  const resetFilter = () => {
+    dispatch(setDateFilter(null));
   }
 
   return (
     <Root>
-      <Button title="Select date" onPress={() => setOpen(true)} />
+      <Button title="Select date" onPress={() => setOpen(true)}  />
+      <Button title="Reset filter" onPress={resetFilter} transparent/>
       <DatePicker
         modal
         open={open}
@@ -45,7 +50,9 @@ const DateFilter = () => {
 export default DateFilter;
 
 const Root = styled.View`
-  height: 55px;
   margin-top: 15px;
-  padding: 0 15px;
+  padding: 0 15px 15px 15px;
+  justify-content: space-between;
+  height: 115px;
 `;
+ 

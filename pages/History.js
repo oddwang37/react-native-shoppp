@@ -50,10 +50,9 @@ const History = () => {
           data={filteredItems}
           renderItem={renderItem}
           contentContainerStyle={{
-            paddingBottom: 80,
+            paddingBottom: 135,
             paddingLeft: 15,
             paddingRight: 15,
-            paddingTop: 15,
           }}
         />
       ) : (
