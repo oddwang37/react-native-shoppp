@@ -20,7 +20,6 @@ const ItemsBlock = ({products}) => {
         id={item.id}
         price={item.retailPrice}
         colorway={item.colorway}
-        inCart={item.inCart}
       />
     );
   };
@@ -34,7 +33,7 @@ const ItemsBlock = ({products}) => {
           data={filteredProducts}
           renderItem={renderItem}
           numColumns={2}
-          contentContainerStyle={{paddingBottom: 100}}
+          contentContainerStyle={{paddingBottom: 120}}
           columnWrapperStyle={{justifyContent: 'space-between'}}
           keyExtractor={item => item.id}
         />
@@ -47,7 +46,6 @@ export default ItemsBlock;
 
 const Wrapper = styled.FlatList`
   display: flex;
-  padding: 5px 15px;
 `;
 
 const LoadingSpinner = styled.ActivityIndicator`

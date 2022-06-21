@@ -4,22 +4,21 @@ import styled from 'styled-components/native';
 import {useSelector, useDispatch} from 'react-redux';
 
 import {addProductCart, deleteProductCart} from '../redux/actions/cart';
-import {changeProductInCart} from '../redux/actions/products';
 import {addProductToHistory} from '../redux/actions/history';
 
-const ProductCard = ({title, img, id, price, colorway, inCart}) => {
+const ProductCard = ({title, img, id, price, colorway}) => {
   const dispatch = useDispatch();
   const cartItems = useSelector(({cart}) => cart.products);
 
+  let isItemInCart = false;
+
+  cartItems.forEach(item => {
+    if (item.id === id) {
+      isItemInCart = true;
+    }
+  });
+
   const handleProductClick = () => {
-    let isItemInCart = false;
-
-    cartItems.forEach(item => {
-      if (item.id === id) {
-        isItemInCart = true;
-      }
-    });
-
     if (isItemInCart) {
       dispatch(deleteProductCart(id));
     } else {
@@ -33,10 +32,9 @@ const ProductCard = ({title, img, id, price, colorway, inCart}) => {
       dispatch(addProductCart(itemObj));
       dispatch(addProductToHistory({...itemObj, date: Date.now()}));
     }
-    dispatch(changeProductInCart(id));
   };
 
-  const icon = inCart
+  const icon = isItemInCart
     ? require('./../assets/star.png')
     : require('./../assets/unactive-star.png');
   <Image source={icon} />;

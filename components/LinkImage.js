@@ -3,17 +3,20 @@ import styled from 'styled-components/native';
 import {View} from 'react-native';
 import {useSelector} from 'react-redux';
 
-const LinkImage = ({onPress, imgPath, badge}) => {
+const LinkImage = ({onPress, imgPath, badge, style}) => {
   const isFetching = useSelector(({products}) => products.isFetching);
   const cartLength = useSelector(({cart}) => cart.products.length);
 
   return (
-    <View>
+    <>
+    {imgPath && <View>
       <Link
         disabled={isFetching}
         onPress={onPress}
         activeOpacity={0.9}
-        underlayColor="#cccccc">
+        underlayColor="#cccccc"
+        style={style}
+        >
         <Img source={imgPath} />
       </Link>
       {badge && cartLength > 0 ? (
@@ -21,7 +24,8 @@ const LinkImage = ({onPress, imgPath, badge}) => {
           <BadgeNumber>{cartLength}</BadgeNumber>
         </Badge>
       ) : null}
-    </View>
+    </View>}
+    </>
   );
 };
 

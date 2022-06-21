@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components/native';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -21,7 +21,7 @@ export default Input;
 
 const Root = styled.View`
   position: relative;
-  width: 100%;
+  flex: 0.97;
 `;
 const TextInput = styled.TextInput`
   height: 40px;
@@ -29,7 +29,7 @@ const TextInput = styled.TextInput`
   border-radius: 5px;
   border: 1px solid #000;
   width: 100%;
-  padding: 0 40px 0 10px;
+  padding: 0 50px 0 10px;
   background-color: #fff;
 `;
 

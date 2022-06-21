@@ -19,5 +19,4 @@ const AutocompleteList = ({items}) => {
 export default AutocompleteList;
 
 const List = styled.FlatList`
-  padding: 0 15px 20px 15px;
 `;

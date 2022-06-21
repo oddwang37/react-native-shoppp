@@ -25,13 +25,30 @@ const getHeaderImageLink = route => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Catalog';
 
   switch (routeName) {
+    // first string is responsible for likning
     // last boolean is responsible for displaying badge with quantity of items in cart
     case 'Catalog':
       return ['My Cart', require('./assets/cart.png'), true];
     case 'My Cart':
       return ['Catalog', require('./assets/home.png'), false];
+    case 'Filters':
+      return ['Filters', null];
   }
 };
+
+const getHeaderShown = route => {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Catalog';
+
+  return !(routeName === 'Filters');
+
+}
+
+const getHeaderUppercase = route => {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Catalog';
+
+  return routeName.toUpperCase();
+
+}
 
 const App: () => Node = () => {
   return (
@@ -52,10 +69,11 @@ const App: () => Node = () => {
                     badge={getHeaderImageLink(route)[2]}
                   />
                 ),
-                headerTitle: getFocusedRouteNameFromRoute(route),
+                headerTitle: getHeaderUppercase(route),
+                headerShown: getHeaderShown(route),
               })}
             />
-            <Drawer.Screen name="History" component={History} />
+            <Drawer.Screen name="History" component={History} options={{headerTitle: 'HISTORY'}}/>
           </Drawer.Navigator>
         </NavigationContainer>
       </PersistGate>

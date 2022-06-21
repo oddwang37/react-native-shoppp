@@ -3,13 +3,14 @@ import {View} from 'react-native';
 import {useEffect} from 'react';
 import axios from 'axios';
 import {useSelector, useDispatch} from 'react-redux';
+import styled from 'styled-components';
 
 import {setProducts} from '../redux/actions/products';
 import Search from '../components/Search';
 import ItemsBlock from '../components/ItemsBlock';
 import AutocompleteList from '../components/AutoCompleteList';
 
-const Catalog = () => {
+const Catalog = ({navigation}) => {
   const dispatch = useDispatch();
   const products = useSelector(({products}) => products.items);
   const filterSearch = useSelector(({filter}) => filter.filterSearch);
@@ -23,11 +24,9 @@ const Catalog = () => {
 
   const getProducts = async () => {
     try {
-      const result = await axios.get(
-        'https://example-data.draftbit.com/sneakers?_limit=200',
+      const { data } = await axios.get(
+        'https://example-data.draftbit.com/sneakers?_sort=retailPrice&_order=descr',
       );
-      const data = result.data.slice();
-      data.forEach(item => (item.inCart = false));
       dispatch(setProducts(data));
     } catch (error) {
       alert(error);
@@ -39,15 +38,19 @@ const Catalog = () => {
   );
 
   return (
-    <View>
-      <Search />
+    <Root>
+      <Search navigation={navigation} />
       {isAutocompleteEnabled ? (
         <AutocompleteList items={filteredProducts} />
       ) : (
         <ItemsBlock products={filteredProducts} />
       )}
-    </View>
+    </Root>
   );
 };
 
 export default Catalog;
+
+const Root = styled.View`
+  padding: 10px 15px 10px 15px;
+`

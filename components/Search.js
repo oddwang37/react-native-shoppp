@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import {useDispatch, useSelector} from 'react-redux';
-import {BackHandler, Keyboard} from 'react-native';
+import {BackHandler, Keyboard, StyleSheet} from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 
 import {setFilterText} from '../redux/actions/filter';
 import {setAutocompleteMode} from '../redux/actions/filter';
-import {Input} from './ui';
+import {Input, Button} from './ui';
+import LinkImage from '../components/LinkImage';
 
 const Search = ({navigation}) => {
   const dispatch = useDispatch();
@@ -41,6 +42,13 @@ const Search = ({navigation}) => {
         onChangeText={text => dispatch(setFilterText(text))}
         value={filterSearch}
       />
+     <FilterButton
+        onPress={() => navigation.navigate('Filters')}
+        activeOpacity={0.9}
+        underlayColor="#cccccc"
+        >
+        <Img source={require('../assets/filter.png')} />
+      </FilterButton>
     </Root>
   );
 };
@@ -48,7 +56,25 @@ const Search = ({navigation}) => {
 export default Search;
 
 const Root = styled.View`
-  height: 70px;
+  height: 60px;
+  padding-top: 5px;
+  padding-bottom: 15px;
   flex-direction: row;
-  padding: 15px 15px 10px 15px;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const FilterButton = styled.TouchableHighlight`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  position: relative;
+`;
+
+const Img = styled.Image`
+  width: 40px;
+  height: 40px;
 `;
