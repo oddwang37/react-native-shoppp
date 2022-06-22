@@ -1,8 +1,8 @@
-import React, { useRef } from 'react';
+import React, {useRef} from 'react';
 import styled from 'styled-components/native';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {setFilterText} from '../../redux/actions/filter';
+import {setSearchValue} from '../../redux/actions/filter';
 
 const Input = props => {
   const dispatch = useDispatch();
@@ -10,7 +10,11 @@ const Input = props => {
   return (
     <Root>
       <TextInput {...props} />
-      <Clear onPress={() => dispatch(setFilterText(''))}>
+      <Clear
+        onPress={() => {
+          props.onPressClear();
+          dispatch(setSearchValue(''));
+        }}>
         <ClearText>Clear</ClearText>
       </Clear>
     </Root>

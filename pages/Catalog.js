@@ -5,7 +5,7 @@ import axios from 'axios';
 import {useSelector, useDispatch} from 'react-redux';
 import styled from 'styled-components';
 
-import {setProducts} from '../redux/actions/products';
+import {setProducts, fetchProducts} from '../redux/actions/products';
 import Search from '../components/Search';
 import ItemsBlock from '../components/ItemsBlock';
 import AutocompleteList from '../components/AutoCompleteList';
@@ -13,37 +13,24 @@ import AutocompleteList from '../components/AutoCompleteList';
 const Catalog = ({navigation}) => {
   const dispatch = useDispatch();
   const products = useSelector(({products}) => products.items);
-  const filterSearch = useSelector(({filter}) => filter.filterSearch);
+  const searchValue = useSelector(({filter}) => filter.searchValue);
   const isAutocompleteEnabled = useSelector(
     ({filter}) => filter.isAutocompleteEnabled,
   );
 
   useEffect(() => {
-    getProducts();
-  }, []);
+    dispatch(fetchProducts(searchValue));
+  }, [searchValue]);
 
-  const getProducts = async () => {
-    try {
-      const { data } = await axios.get(
-        'https://example-data.draftbit.com/sneakers?_sort=retailPrice&_order=descr',
-      );
-      dispatch(setProducts(data));
-    } catch (error) {
-      alert(error);
-    }
-  };
-
-  const filteredProducts = products.filter(item =>
-    item.title.includes(filterSearch),
-  );
+  const first10Items = products.slice(0, 10);
 
   return (
     <Root>
       <Search navigation={navigation} />
       {isAutocompleteEnabled ? (
-        <AutocompleteList items={filteredProducts} />
+        <AutocompleteList items={first10Items} />
       ) : (
-        <ItemsBlock products={filteredProducts} />
+        <ItemsBlock products={products} />
       )}
     </Root>
   );
@@ -53,4 +40,4 @@ export default Catalog;
 
 const Root = styled.View`
   padding: 10px 15px 10px 15px;
-`
+`;

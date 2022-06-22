@@ -2,19 +2,19 @@ import React from 'react';
 import styled from 'styled-components/native';
 import {useDispatch} from 'react-redux';
 
-import {setAutocompleteMode, setFilterText} from '../redux/actions/filter';
+import {setAutocompleteMode, setSearchValue} from '../redux/actions/filter';
 
 const TextItem = ({title}) => {
   const dispatch = useDispatch();
 
   const onItemPress = () => {
     dispatch(setAutocompleteMode(false));
-    dispatch(setFilterText(title));
+    dispatch(setSearchValue(title));
   };
   return (
     <Root
       activeOpacity={0.6}
-      underlayColor="#ddd"
+      underlayColor="#bdbdbd"
       onPress={() => onItemPress()}>
       <ItemText>{title}</ItemText>
     </Root>
@@ -23,7 +23,7 @@ const TextItem = ({title}) => {
 
 export default TextItem;
 
-const Root = styled.Pressable`
+const Root = styled.TouchableHighlight`
   padding: 10px;
   border-bottom-color: #000;
   border-bottom-width: 1px;

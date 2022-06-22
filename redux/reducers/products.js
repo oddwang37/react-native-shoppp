@@ -8,8 +8,9 @@ const initialState = {
 export const productsReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.SET_PRODUCTS:
-      return {items: action.payload, isFetching: false};
-      return {...state, items: oldItems};
+      return {...state, items: action.payload};
+    case types.SET_IS_FETCHING:
+      return {...state, isFetching: action.payload};
     default:
       return state;
   }

@@ -4,13 +4,9 @@ import {useSelector} from 'react-redux';
 
 import ProductCard from './ProductCard';
 
-const ItemsBlock = ({products}) => {
-  const filterSearch = useSelector(({filter}) => filter.filterSearch);
+const ItemsBlock = () => {
   const isFetching = useSelector(({products}) => products.isFetching);
-
-  const filteredProducts = products.filter(item =>
-    item.title.includes(filterSearch),
-  );
+  const products = useSelector(({products}) => products.items);
 
   const renderItem = ({item, index}) => {
     return (
@@ -27,10 +23,10 @@ const ItemsBlock = ({products}) => {
   return (
     <>
       {isFetching ? (
-        <LoadingSpinner size="large" color="#7950f2" />
+        <LoadingSpinner size="large" color="#131313" />
       ) : (
         <Wrapper
-          data={filteredProducts}
+          data={products}
           renderItem={renderItem}
           numColumns={2}
           contentContainerStyle={{paddingBottom: 120}}

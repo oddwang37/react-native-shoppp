@@ -1,20 +1,37 @@
-import React from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import styled from 'styled-components/native';
 import {useDispatch, useSelector} from 'react-redux';
-import {BackHandler, Keyboard, StyleSheet} from 'react-native';
+import {BackHandler, Keyboard} from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
+import debounce from 'lodash.debounce';
 
-import {setFilterText} from '../redux/actions/filter';
+import {setSearchValue} from '../redux/actions/filter';
 import {setAutocompleteMode} from '../redux/actions/filter';
 import {Input, Button} from './ui';
-import LinkImage from '../components/LinkImage';
 
 const Search = ({navigation}) => {
   const dispatch = useDispatch();
-  const filterSearch = useSelector(({filter}) => filter.filterSearch);
+  const [nonDebouncedValue, setNonDebouncedValue] = useState();
+  const searchValue = useSelector(({filter}) => searchValue);
   const isAutocompleteEnabled = useSelector(
     ({filter}) => filter.isAutocompleteEnabled,
   );
+
+  const updateSearchValue = useCallback(
+    debounce(text => {
+      dispatch(setSearchValue(text));
+    }, 1000),
+    [],
+  );
+
+  useEffect(() => {
+    setNonDebouncedValue(searchValue);
+  }, [searchValue]);
+
+  const handleChangeText = text => {
+    updateSearchValue(text);
+    setNonDebouncedValue(text);
+  };
 
   useFocusEffect(
     React.useCallback(() => {
@@ -39,14 +56,14 @@ const Search = ({navigation}) => {
         onFocus={() => dispatch(setAutocompleteMode(true))}
         onBlur={() => dispatch(setAutocompleteMode(false))}
         placeholder="Find an item..."
-        onChangeText={text => dispatch(setFilterText(text))}
-        value={filterSearch}
+        onChangeText={handleChangeText}
+        value={nonDebouncedValue}
+        onPressClear={() => setNonDebouncedValue('')}
       />
-     <FilterButton
+      <FilterButton
         onPress={() => navigation.navigate('Filters')}
         activeOpacity={0.9}
-        underlayColor="#cccccc"
-        >
+        underlayColor="#cccccc">
         <Img source={require('../assets/filter.png')} />
       </FilterButton>
     </Root>
