@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {Image} from 'react-native';
 import styled from 'styled-components/native';
 import {useSelector, useDispatch} from 'react-redux';

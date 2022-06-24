@@ -14,7 +14,7 @@ const TextItem = ({title}) => {
   return (
     <Root
       activeOpacity={0.6}
-      underlayColor="#bdbdbd"
+      underlayColor="#ddd"
       onPress={() => onItemPress()}>
       <ItemText>{title}</ItemText>
     </Root>
@@ -23,7 +23,7 @@ const TextItem = ({title}) => {
 
 export default TextItem;
 
-const Root = styled.TouchableHighlight`
+const Root = styled.Pressable`
   padding: 10px;
   border-bottom-color: #000;
   border-bottom-width: 1px;

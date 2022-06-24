@@ -1,37 +1,20 @@
-import React, {useEffect, useState, useCallback} from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import {useDispatch, useSelector} from 'react-redux';
-import {BackHandler, Keyboard} from 'react-native';
+import {BackHandler, Keyboard, StyleSheet} from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
-import debounce from 'lodash.debounce';
 
 import {setSearchValue} from '../redux/actions/filter';
 import {setAutocompleteMode} from '../redux/actions/filter';
 import {Input, Button} from './ui';
+import LinkImage from '../components/LinkImage';
 
 const Search = ({navigation}) => {
   const dispatch = useDispatch();
-  const [nonDebouncedValue, setNonDebouncedValue] = useState();
-  const searchValue = useSelector(({filter}) => searchValue);
+  const searchValue = useSelector(({filter}) => filter.searchValue);
   const isAutocompleteEnabled = useSelector(
     ({filter}) => filter.isAutocompleteEnabled,
   );
-
-  const updateSearchValue = useCallback(
-    debounce(text => {
-      dispatch(setSearchValue(text));
-    }, 1000),
-    [],
-  );
-
-  useEffect(() => {
-    setNonDebouncedValue(searchValue);
-  }, [searchValue]);
-
-  const handleChangeText = text => {
-    updateSearchValue(text);
-    setNonDebouncedValue(text);
-  };
 
   useFocusEffect(
     React.useCallback(() => {
@@ -56,12 +39,11 @@ const Search = ({navigation}) => {
         onFocus={() => dispatch(setAutocompleteMode(true))}
         onBlur={() => dispatch(setAutocompleteMode(false))}
         placeholder="Find an item..."
-        onChangeText={handleChangeText}
-        value={nonDebouncedValue}
-        onPressClear={() => setNonDebouncedValue('')}
+        onChangeText={text => dispatch(setSearchValue(text))}
+        value={searchValue}
       />
       <FilterButton
-        onPress={() => navigation.navigate('Filters')}
+        onPress={() => navigation.navigate('AdvancedSearch')}
         activeOpacity={0.9}
         underlayColor="#cccccc">
         <Img source={require('../assets/filter.png')} />

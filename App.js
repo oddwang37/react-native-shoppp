@@ -31,24 +31,22 @@ const getHeaderImageLink = route => {
       return ['My Cart', require('./assets/cart.png'), true];
     case 'My Cart':
       return ['Catalog', require('./assets/home.png'), false];
-    case 'Filters':
-      return ['Filters', null];
+    case 'AdvancedSearch':
+      return ['', null];
   }
 };
 
 const getHeaderShown = route => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Catalog';
 
-  return !(routeName === 'Filters');
-
-}
+  return !(routeName === 'AdvancedSearch');
+};
 
 const getHeaderUppercase = route => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Catalog';
 
   return routeName.toUpperCase();
-
-}
+};
 
 const App: () => Node = () => {
   return (
@@ -73,7 +71,11 @@ const App: () => Node = () => {
                 headerShown: getHeaderShown(route),
               })}
             />
-            <Drawer.Screen name="History" component={History} options={{headerTitle: 'HISTORY'}}/>
+            <Drawer.Screen
+              name="History"
+              component={History}
+              options={{headerTitle: 'HISTORY'}}
+            />
           </Drawer.Navigator>
         </NavigationContainer>
       </PersistGate>

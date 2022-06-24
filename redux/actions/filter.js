@@ -1,9 +1,9 @@
 export const types = {
   SET_SEARCH_VALUE: 'SET_SEARCH_VALUE',
-  SET_FILTER_VALUE: 'SET_FILTER_VALUE',
   SET_AUTOCOMPLETE_MODE: 'SET_AUTOCOMPLETE_MODE',
+  SET_FILTER_TYPE: 'SET_FILTER_TYPE',
   SET_SORT_BY: 'SET_SORT_BY',
-  SET_SORT_ORDER: 'SET_SORT_ORDER',
+  SET_ORDER_BY: 'SET_ORDER_BY',
 };
 
 export const setSearchValue = text => {
@@ -20,23 +20,19 @@ export const setAutocompleteMode = bool => {
   };
 };
 
-export const setFilterValue = string => {
+export const setFilterType = text => {
   return {
-    type: types.SET_FILTER_VALUE,
-    payload: string,
+    type: types.SET_FILTER_TYPE,
+    payload: text,
   };
 };
 
-export const setSortBy = string => {
-  return {
-    type: types.SET_SORT_BY,
-    payload: string,
-  };
-};
+export const setSortBy = text => ({
+  type: types.SET_SORT_BY,
+  payload: text,
+});
 
-export const setSortOrder = string => {
-  return {
-    type: types.SET_SORT_ORDER,
-    payload: string,
-  };
-};
+export const setOrderBy = text => ({
+  type: types.SET_ORDER_BY,
+  payload: text,
+});

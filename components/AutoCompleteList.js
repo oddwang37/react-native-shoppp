@@ -9,7 +9,7 @@ const AutocompleteList = ({items}) => {
   return (
     <List
       data={items}
-      renderItem={renderItem}
+      renderItem={({item}) => <TextItem title={item.title} />}
       keyExtractor={item => item.id}
       keyboardShouldPersistTaps={'handled'}
     />
@@ -18,4 +18,5 @@ const AutocompleteList = ({items}) => {
 
 export default AutocompleteList;
 
-const List = styled.FlatList``;
+const List = styled.FlatList`
+`;

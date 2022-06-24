@@ -5,7 +5,7 @@ import axios from 'axios';
 import {useSelector, useDispatch} from 'react-redux';
 import styled from 'styled-components';
 
-import {setProducts, fetchProducts} from '../redux/actions/products';
+import {fetchProducts} from '../redux/asyncActions/products';
 import Search from '../components/Search';
 import ItemsBlock from '../components/ItemsBlock';
 import AutocompleteList from '../components/AutoCompleteList';
@@ -13,24 +13,25 @@ import AutocompleteList from '../components/AutoCompleteList';
 const Catalog = ({navigation}) => {
   const dispatch = useDispatch();
   const products = useSelector(({products}) => products.items);
-  const searchValue = useSelector(({filter}) => filter.searchValue);
-  const isAutocompleteEnabled = useSelector(
-    ({filter}) => filter.isAutocompleteEnabled,
-  );
+  const {searchValue, isAutocompleteEnabled, filterType, sortBy, orderBy} =
+    useSelector(({filter}) => filter);
 
   useEffect(() => {
-    dispatch(fetchProducts(searchValue));
-  }, [searchValue]);
+    dispatch(fetchProducts(filterType, sortBy, orderBy));
+    //alert(JSON.stringify(store));
+  }, [filterType, sortBy, orderBy]);
 
-  const first10Items = products.slice(0, 10);
+  const filteredProducts = products.filter(item =>
+    item.title.includes(searchValue),
+  );
 
   return (
     <Root>
       <Search navigation={navigation} />
       {isAutocompleteEnabled ? (
-        <AutocompleteList items={first10Items} />
+        <AutocompleteList items={filteredProducts} />
       ) : (
-        <ItemsBlock products={products} />
+        <ItemsBlock products={filteredProducts} />
       )}
     </Root>
   );

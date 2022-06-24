@@ -10,11 +10,7 @@ const Input = props => {
   return (
     <Root>
       <TextInput {...props} />
-      <Clear
-        onPress={() => {
-          props.onPressClear();
-          dispatch(setSearchValue(''));
-        }}>
+      <Clear onPress={() => dispatch(setSearchValue(''))}>
         <ClearText>Clear</ClearText>
       </Clear>
     </Root>
