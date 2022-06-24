@@ -42,10 +42,10 @@ const getHeaderShown = route => {
   return !(routeName === 'AdvancedSearch');
 };
 
-const getHeaderUppercase = route => {
+const getHeaderTitle = route => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Catalog';
 
-  return routeName.toUpperCase();
+  return routeName;
 };
 
 const App: () => Node = () => {
@@ -53,7 +53,12 @@ const App: () => Node = () => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
-          <Drawer.Navigator>
+          <Drawer.Navigator
+            screenOptions={{
+              drawerActiveTintColor: '#fff',
+              drawerInactiveTintColor: 'rgba(0, 0, 0, 0.7)',
+              drawerActiveBackgroundColor: '#131313',
+            }}>
             <Drawer.Screen
               name="Home"
               component={HomeStack}
@@ -67,7 +72,7 @@ const App: () => Node = () => {
                     badge={getHeaderImageLink(route)[2]}
                   />
                 ),
-                headerTitle: getHeaderUppercase(route),
+                headerTitle: getHeaderTitle(route),
                 headerShown: getHeaderShown(route),
               })}
             />

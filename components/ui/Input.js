@@ -27,7 +27,6 @@ const TextInput = styled.TextInput`
   height: 40px;
   align-self: stretch;
   border-radius: 5px;
-  border: 1px solid #000;
   width: 100%;
   padding: 0 50px 0 10px;
   background-color: #fff;

@@ -55,7 +55,7 @@ const Search = ({navigation}) => {
 export default Search;
 
 const Root = styled.View`
-  height: 60px;
+  height: 45px;
   padding-top: 5px;
   padding-bottom: 15px;
   flex-direction: row;
@@ -67,13 +67,13 @@ const FilterButton = styled.TouchableHighlight`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   border-radius: 10px;
   position: relative;
 `;
 
 const Img = styled.Image`
-  width: 40px;
-  height: 40px;
+  width: 33px;
+  height: 33px;
 `;

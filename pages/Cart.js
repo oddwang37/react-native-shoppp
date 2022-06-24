@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {FlatList} from 'react-native';
 
+import {clearCart} from '../redux/actions/cart';
 import ListItem from '../components/ListItem';
 import CartPlaceholder from '../components/CartPlaceholder';
 import Button from '../components/ui/Button';
 
 const Cart = ({navigation}) => {
+  const dispatch = useDispatch();
   const products = useSelector(({cart}) => cart.products);
   const cartLength = products.length;
 
@@ -19,6 +21,7 @@ const Cart = ({navigation}) => {
         id={item.id}
         price={item.price}
         colorway={item.colorway}
+        onPress={() => {}}
       />
     );
   };
@@ -36,17 +39,18 @@ const Cart = ({navigation}) => {
             data={products}
             renderItem={renderItem}
             contentContainerStyle={{
+              paddingRight: 4,
+              paddingLeft: 4,
               paddingBottom: 80,
-              paddingLeft: 15,
-              paddingRight: 15,
               paddingTop: 5,
             }}
           />
           <Footer>
+            <Button title="Clear cart" onPress={() => dispatch(clearCart())} />
             <Button
+              transparent
               onPress={() => alert('You are not have enough money :( ')}
-              title="Purchase"
-              style={{marginLeft: 15, marginRight: 15}}></Button>
+              title="Purchase"></Button>
           </Footer>
         </>
       )}
@@ -58,6 +62,7 @@ export default Cart;
 
 const Root = styled.View`
   flex: 1;
+  padding: 0 15px;
 `;
 
 const Title = styled.Text`

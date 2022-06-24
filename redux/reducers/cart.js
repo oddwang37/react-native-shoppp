@@ -13,6 +13,8 @@ export const cartReducer = (state = initialState, action) => {
         product => product.id !== action.payload,
       );
       return {products: newProducts};
+    case types.CLEAR_CART:
+      return {products: []};
     default:
       return state;
   }

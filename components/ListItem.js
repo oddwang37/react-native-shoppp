@@ -1,18 +1,28 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import {useDispatch} from 'react-redux';
 
-const ListItem = ({title, img, price, date, colorway}) => {
+import DeleteButton from './ui/DeleteButton';
+import {deleteProductCart} from '../redux/actions/cart';
+
+const ListItem = ({title, img, price, date, colorway, id}) => {
+  const dispatch = useDispatch();
+
+  const onPressDelete = () => {
+    dispatch(deleteProductCart(id));
+  };
   return (
     <Root>
       <Img resizeMode="contain" source={{uri: `${img}`}} />
       <Inner>
         <Title>{title}</Title>
         <SecondText>
-          {colorway.length > 43 ? colorway.slice(0, 43) + '...' : colorway}
+          {colorway.length > 35 ? colorway.slice(0, 35) + '..' : colorway}
         </SecondText>
         <Price>{price ? '$' + price : 'N/A'}</Price>
         <SecondText>{date}</SecondText>
       </Inner>
+      <DeleteButton onPress={onPressDelete} />
     </Root>
   );
 };
@@ -40,7 +50,6 @@ const Img = styled.Image`
   height: 65px;
   border-radius: 5px;
 `;
-
 const Inner = styled.View`
   padding-left: 20px;
   width: 0;

@@ -31,14 +31,14 @@ const ItemsBlock = ({products}) => {
   return (
     <Root>
       {isLoading ? (
-        <LoadingSpinner size="large" color="#7950f2" />
+        <LoadingSpinner size="large" color="#131313" />
       ) : (
         <>
           <Wrapper
             data={filteredProducts}
             renderItem={renderItem}
             numColumns={2}
-            contentContainerStyle={{paddingBottom: 170}}
+            contentContainerStyle={{paddingTop: 5, paddingBottom: 170}}
             columnWrapperStyle={{justifyContent: 'space-between'}}
             keyExtractor={keyExtractor}
             showsVerticalScrollIndicator={false}

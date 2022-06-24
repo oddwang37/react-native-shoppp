@@ -1,6 +1,7 @@
 export const types = {
   ADD_PRODUCT_CART: 'ADD_PRODUCT_CART',
   DELETE_PRODUCT_CART: 'DELETE_PRODUCT_CART',
+  CLEAR_CART: 'CLEAR_CART',
 };
 
 export const addProductCart = productObj => {
@@ -16,3 +17,7 @@ export const deleteProductCart = id => {
     payload: id,
   };
 };
+
+export const clearCart = () => ({
+  type: types.CLEAR_CART,
+});

@@ -34,7 +34,7 @@ const ProductCard = ({title, img, id, price, colorway}) => {
         dispatch(addProductCart(itemObj));
         dispatch(addProductToHistory({...itemObj, date: Date.now()}));
       }
-    }, 350),
+    }, 150),
     [isItemInCart],
   );
 
@@ -49,7 +49,7 @@ const ProductCard = ({title, img, id, price, colorway}) => {
       <Info>
         <Title>{title}</Title>
         <Colorway>{colorway}</Colorway>
-        <Price>{price ? '$' + price : 'N/A'}</Price>
+        <Price>{price ? '$' + price : 'Out of stock'}</Price>
       </Info>
       <FavIcon source={icon} />
     </Root>
@@ -75,8 +75,8 @@ const Info = styled.View`
 `;
 
 const Title = styled.Text`
-  font-weight: 700;
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 14px;
   width: 100%;
   margin-top: 5px;
   text-transform: capitalize;
@@ -90,7 +90,7 @@ const Colorway = styled.Text`
 `;
 
 const Price = styled.Text`
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   color: #000;
   align-self: flex-start;
