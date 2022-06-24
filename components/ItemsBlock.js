@@ -10,7 +10,7 @@ import Button from './ui/Button';
 const ItemsBlock = ({products}) => {
   const dispatch = useDispatch();
   const {filterType, sortBy, searchValue} = useSelector(({filter}) => filter);
-  const isLoading = useSelector(({products}) => products.isLoading);
+  const {isLoading, error} = useSelector(({products}) => products);
   const filteredProducts = products.filter(item =>
     item.title.includes(searchValue),
   );
@@ -30,7 +30,15 @@ const ItemsBlock = ({products}) => {
   const keyExtractor = item => item.id;
   return (
     <Root>
-      {isLoading ? (
+      {error ? (
+        <>
+          <ErrorImg source={require('../assets/error.png')} />
+          <ErrorMessage>
+            Oh no, there was an error with recieving items. Please, try again
+            later
+          </ErrorMessage>
+        </>
+      ) : isLoading ? (
         <LoadingSpinner size="large" color="#131313" />
       ) : (
         <>
@@ -70,6 +78,19 @@ const Wrapper = styled.FlatList`
 
 const LoadingSpinner = styled.ActivityIndicator`
   margin-top: 250px;
+`;
+
+const ErrorImg = styled.Image`
+  width: 40px;
+  height: 40px;
+  align-self: center;
+  margin-top: 210px;
+`;
+const ErrorMessage = styled.Text`
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  margin-top: 25px;
 `;
 
 const styles = StyleSheet.create({

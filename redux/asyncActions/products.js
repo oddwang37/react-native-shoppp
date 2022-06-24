@@ -1,9 +1,10 @@
 import axios from 'axios';
 
-import {setProducts, setIsLoading} from '../actions/products';
+import {setProducts, setIsLoading, setError} from '../actions/products';
 
 export const fetchProducts = (filter, sortBy, order) => dispatch => {
   dispatch(setIsLoading(true));
+  dispatch(setError(null));
   let parameter = filter ? `filter=${filter}&` : '';
   sortBy ? (parameter += `sortBy=${sortBy}&`) : null;
   order ? (parameter += `order=${order}`) : null;
@@ -12,5 +13,8 @@ export const fetchProducts = (filter, sortBy, order) => dispatch => {
     .then(({data}) => {
       dispatch(setProducts(data));
       dispatch(setIsLoading(false));
+    })
+    .catch(error => {
+      dispatch(setError(error));
     });
 };
