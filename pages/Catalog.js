@@ -21,17 +21,19 @@ const Catalog = ({navigation}) => {
     //alert(JSON.stringify(store));
   }, [filterType, sortBy, orderBy]);
 
-  const filteredProducts = products.filter(item =>
-    item.title.includes(searchValue),
+  const searchedProducts = products.filter(item =>
+    item.title.toLowerCase().includes(searchValue.toLowerCase()),
   );
+
+  const first10Products = searchedProducts.slice(0, 10);
 
   return (
     <Root>
       <Search navigation={navigation} />
       {isAutocompleteEnabled ? (
-        <AutocompleteList items={filteredProducts} />
+        <AutocompleteList items={first10Products} />
       ) : (
-        <ItemsBlock products={filteredProducts} />
+        <ItemsBlock products={searchedProducts} />
       )}
     </Root>
   );

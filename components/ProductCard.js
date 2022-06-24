@@ -2,6 +2,7 @@ import React, {useCallback} from 'react';
 import {Image} from 'react-native';
 import styled from 'styled-components/native';
 import {useSelector, useDispatch} from 'react-redux';
+import debounce from 'lodash.debounce';
 
 import {addProductCart, deleteProductCart} from '../redux/actions/cart';
 import {addProductToHistory} from '../redux/actions/history';
@@ -18,21 +19,24 @@ const ProductCard = ({title, img, id, price, colorway}) => {
     }
   });
 
-  const handleProductClick = () => {
-    if (isItemInCart) {
-      dispatch(deleteProductCart(id));
-    } else {
-      const itemObj = {
-        title,
-        img,
-        id,
-        price,
-        colorway,
-      };
-      dispatch(addProductCart(itemObj));
-      dispatch(addProductToHistory({...itemObj, date: Date.now()}));
-    }
-  };
+  const handleProductClick = useCallback(
+    debounce(() => {
+      if (isItemInCart) {
+        dispatch(deleteProductCart(id));
+      } else {
+        const itemObj = {
+          title,
+          img,
+          id,
+          price,
+          colorway,
+        };
+        dispatch(addProductCart(itemObj));
+        dispatch(addProductToHistory({...itemObj, date: Date.now()}));
+      }
+    }, 350),
+    [isItemInCart],
+  );
 
   const icon = isItemInCart
     ? require('./../assets/star.png')
@@ -52,7 +56,7 @@ const ProductCard = ({title, img, id, price, colorway}) => {
   );
 };
 
-export default ProductCard;
+export default React.memo(ProductCard);
 
 const Root = styled.TouchableOpacity`
   width: 47%;

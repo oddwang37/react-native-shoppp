@@ -17,7 +17,7 @@ const ListItem = ({title, img, price, date, colorway}) => {
   );
 };
 
-export default ListItem;
+export default React.memo(ListItem);
 
 const Root = styled.View`
   flex-direction: row;

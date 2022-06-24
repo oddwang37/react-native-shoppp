@@ -12,10 +12,7 @@ const TextItem = ({title}) => {
     dispatch(setSearchValue(title));
   };
   return (
-    <Root
-      activeOpacity={0.6}
-      underlayColor="#ddd"
-      onPress={() => onItemPress()}>
+    <Root activeOpacity={0.6} underlayColor="#ddd" onPress={onItemPress}>
       <ItemText>{title}</ItemText>
     </Root>
   );

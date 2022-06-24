@@ -27,7 +27,7 @@ const ItemsBlock = ({products}) => {
     );
   };
 
-  const handleClearFilterPress = () => {};
+  const keyExtractor = item => item.id;
   return (
     <Root>
       {isLoading ? (
@@ -40,7 +40,7 @@ const ItemsBlock = ({products}) => {
             numColumns={2}
             contentContainerStyle={{paddingBottom: 170}}
             columnWrapperStyle={{justifyContent: 'space-between'}}
-            keyExtractor={item => item.id}
+            keyExtractor={keyExtractor}
             showsVerticalScrollIndicator={false}
           />
           {filterType || sortBy ? (
